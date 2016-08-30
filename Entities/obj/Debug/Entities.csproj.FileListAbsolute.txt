@@ -1,0 +1,5 @@
+c:\users\vera\documents\visual studio 2013\Projects\TrainingDiary\Entities\bin\Debug\Entities.dll
+c:\users\vera\documents\visual studio 2013\Projects\TrainingDiary\Entities\bin\Debug\Entities.pdb
+c:\users\vera\documents\visual studio 2013\Projects\TrainingDiary\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+c:\users\vera\documents\visual studio 2013\Projects\TrainingDiary\Entities\obj\Debug\Entities.dll
+c:\users\vera\documents\visual studio 2013\Projects\TrainingDiary\Entities\obj\Debug\Entities.pdb
