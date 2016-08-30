@@ -15,9 +15,9 @@ namespace TrainingDiary
             
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            container
-      .RegisterType<IBlahRepository, BlahRepository>()
-      .RegisterType<DbContext, BlahDbContext>(new HierarchicalLifetimeManager());
+       //     container
+     // .RegisterType<IBlahRepository, BlahRepository>()
+    //  .RegisterType<DbContext, BlahDbContext>(new HierarchicalLifetimeManager());
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

@@ -1,24 +1,67 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿<script src="~/Scripts/knockout-3.4.0.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<div data-bind="foreach: users">
+    <h3 data-bind="text: $data.Name"></h3>
+    <div><input type="text" data-bind="value: $data.Id" /> </div>
+    <input type="button" value="Update" data-bind="click: $root.update" />
+    <input type="button" value="Remove Item" data-bind="click: $root.remove" />
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+<hr />
+
+<form data-bind="submit: create">
+    <div>First Name:</div>
+    <div><input type="text" name="FirstName" /></div>
+    <div>Last Name:</div>
+    <div><input type="text" name="LastName" /></div>
+    <div>Age:</div>
+    <div><input type="text" name="Age" /></div>
+    <button type="submit">Add</button>
+</form>
+
+
+@section scripts
+{
+    <script language="javascript">
+
+        //When the DOM is loaded, call the ko.applyBindings() and pass in a new instance of the UsersViewModel:
+        $(document).ready(function () {
+            ko.applyBindings(new UsersViewModel());
+        });
+
+        //Create a user view-model class:
+        function UsersViewModel() {
+
+            var self = this;
+            var baseUri = "http://localhost:64516//api/users";
+            self.users = ko.observableArray(); // Init an empty observable array
+
+            self.create = function (formElement) {
+                $.post(baseUri, $(formElement).serialize(), null, "json")
+                    .done(function (o) {
+                        self.users.push(o);
+                    });
+            }
+            self.update = function (user) {
+                $.ajax({
+                    type: "PUT",
+                    url: baseUri,
+                    data: user
+                });
+            }
+            self.remove = function (user) {
+                // First remove from the server, then from the view-model.
+                $.ajax({
+                    type: "DELETE",
+                    url: baseUri + '/' + user.Id
+                }).done(function () {
+                    self.users.remove(user);
+                });
+            }
+
+            // Adds the value and notifies observers
+            $.getJSON(baseUri, self.users);
+        }
+    </script>
+}

@@ -24,6 +24,11 @@ namespace TrainingDiary
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+          //  bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-1.11.1.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include("~/Scripts/knockout-{version}.js"));
+
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;

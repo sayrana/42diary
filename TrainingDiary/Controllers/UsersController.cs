@@ -7,19 +7,26 @@ using System.Web.Http;
 
 namespace TrainingDiary.Controllers
 {
+    public class User1
+    {
+        public int Id;
+        public string Name;
+    }
     public class UsersController : BaseController
     {
         //todo: unity, resharper, services
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<User1> Get()
         {
-            return new string[] { "value1", "value2" };
+           // return new string[] { "value1", "value2" };
+            return new List<User1>() { new User1 { Id = 0, Name = "John Doe" }};
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public User1 Get(int id)
         {
-            return "value";
+            //return "value";
+            return new User1 { Id = 1, Name = "John Doe 111" };
         }
 
         // POST api/values
@@ -28,7 +35,7 @@ namespace TrainingDiary.Controllers
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(User1 user)
         {
         }
 
