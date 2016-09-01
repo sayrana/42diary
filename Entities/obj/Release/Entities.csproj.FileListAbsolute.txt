@@ -1,0 +1,5 @@
+c:\Projects\42diary\42diary\Entities\bin\Release\Entities.dll
+c:\Projects\42diary\42diary\Entities\bin\Release\Entities.pdb
+c:\Projects\42diary\42diary\Entities\obj\Release\Entities.csprojResolveAssemblyReference.cache
+c:\Projects\42diary\42diary\Entities\obj\Release\Entities.dll
+c:\Projects\42diary\42diary\Entities\obj\Release\Entities.pdb

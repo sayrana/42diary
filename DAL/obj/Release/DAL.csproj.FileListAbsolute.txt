@@ -1,0 +1,14 @@
+c:\Projects\42diary\42diary\DAL\bin\Release\DAL.dll.config
+c:\Projects\42diary\42diary\DAL\bin\Release\DAL.dll
+c:\Projects\42diary\42diary\DAL\bin\Release\DAL.pdb
+c:\Projects\42diary\42diary\DAL\bin\Release\Entities.dll
+c:\Projects\42diary\42diary\DAL\bin\Release\EntityFramework.dll
+c:\Projects\42diary\42diary\DAL\bin\Release\EntityFramework.SqlServer.dll
+c:\Projects\42diary\42diary\DAL\bin\Release\Entities.pdb
+c:\Projects\42diary\42diary\DAL\bin\Release\EntityFramework.xml
+c:\Projects\42diary\42diary\DAL\bin\Release\EntityFramework.SqlServer.xml
+c:\Projects\42diary\42diary\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
+c:\Projects\42diary\42diary\DAL\obj\Release\DAL.dll
+c:\Projects\42diary\42diary\DAL\obj\Release\DAL.pdb
+C:\Projects\42diary\42diary\DAL\obj\Release\DAL.Migrations.InitialCreate.resources
+C:\Projects\42diary\42diary\DAL\obj\Release\DAL.csproj.GenerateResource.Cache

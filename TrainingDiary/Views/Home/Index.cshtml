@@ -1,67 +1,95 @@
-﻿<script src="~/Scripts/knockout-3.4.0.js"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
-<div data-bind="foreach: users">
-    <h3 data-bind="text: $data.Name"></h3>
-    <div><input type="text" data-bind="value: $data.Id" /> </div>
-    <input type="button" value="Update" data-bind="click: $root.update" />
-    <input type="button" value="Remove Item" data-bind="click: $root.remove" />
+﻿
+<div class="page-header">
+    <h1>BookService</h1>
 </div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Trainings</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: trainings">
+                    <li>
+                        <strong><span data-bind="text: Name"></span></strong>: <span data-bind="text: Date"></span>
+                        <span data-bind="text: TrainingTypeName"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
 
-<hr />
-
-<form data-bind="submit: create">
-    <div>First Name:</div>
-    <div><input type="text" name="FirstName" /></div>
-    <div>Last Name:</div>
-    <div><input type="text" name="LastName" /></div>
-    <div>Age:</div>
-    <div><input type="text" name="Age" /></div>
-    <button type="submit">Add</button>
-</form>
-
+</div>
 
 @section scripts
 {
+@Scripts.Render("~/bundles/knockout")
     <script language="javascript">
-
-        //When the DOM is loaded, call the ko.applyBindings() and pass in a new instance of the UsersViewModel:
         $(document).ready(function () {
-            ko.applyBindings(new UsersViewModel());
+            ko.applyBindings(new TrainingViewModel());
         });
-
-        //Create a user view-model class:
-        function UsersViewModel() {
-
+        
+        var TrainingViewModel = function () {
             var self = this;
-            var baseUri = "http://localhost:64516//api/users";
-            self.users = ko.observableArray(); // Init an empty observable array
+            self.trainings = ko.observableArray();
 
-            self.create = function (formElement) {
-                $.post(baseUri, $(formElement).serialize(), null, "json")
-                    .done(function (o) {
-                        self.users.push(o);
-                    });
-            }
-            self.update = function (user) {
-                $.ajax({
-                    type: "PUT",
-                    url: baseUri,
-                    data: user
-                });
-            }
-            self.remove = function (user) {
-                // First remove from the server, then from the view-model.
-                $.ajax({
-                    type: "DELETE",
-                    url: baseUri + '/' + user.Id
-                }).done(function () {
-                    self.users.remove(user);
+            var trainingsUri = 'http://localhost:64516//api/training/';
+            //  var authorsUri = '/api/authors/';
+
+            function ajaxHelper(uri, method, data) {
+                 // Clear error message
+                return $.ajax({
+                    type: method,
+                    url: uri,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: data ? JSON.stringify(data) : null
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
                 });
             }
 
-            // Adds the value and notifies observers
-            $.getJSON(baseUri, self.users);
-        }
+            function getAllTrainings() {
+                ajaxHelper(trainingsUri, 'GET').done(function (data) {
+                    self.trainings(data);
+                });
+            }
+
+            //self.getBookDetail = function (item) {
+            //    ajaxHelper(booksUri + item.Id, 'GET').done(function (data) {
+            //        self.detail(data);
+            //    });
+            //}
+
+            //function getAuthors() {
+            //    ajaxHelper(authorsUri, 'GET').done(function (data) {
+            //        self.authors(data);
+            //    });
+            //}
+
+
+            //self.addBook = function (formElement) {
+            //    var book = {
+            //        AuthorId: self.newBook.Author().Id,
+            //        Genre: self.newBook.Genre(),
+            //        Price: self.newBook.Price(),
+            //        Title: self.newBook.Title(),
+            //        Year: self.newBook.Year()
+            //    };
+
+            //    ajaxHelper(booksUri, 'POST', book).done(function (item) {
+            //        self.books.push(item);
+            //    });
+            //}
+
+            // Fetch the initial data.
+            getAllTrainings();
+            // getAuthors();
+        };
+
+       // ko.applyBindings(new TrainingViewModel());
+
+
     </script>
 }
